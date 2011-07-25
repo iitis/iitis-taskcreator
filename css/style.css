@@ -1,0 +1,42 @@
+/*
+ * iitis-statsbrowser
+ * Paweł Foremski <pjf@iitis.pl> 2011
+ * IITiS PAN Gliwice
+ */
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans;
+}
+
+#world {
+	position: absolute;
+	z-index: 100;
+	top: 0; left: 0; right: 0; bottom: 0;
+}
+
+#tpane {
+	position: absolute;
+	left: 0; top: 0; right: 0;
+	height: 7%;
+	border-bottom: 1px solid gray;
+}
+	#tpane div { position: absolute; width: 50%; padding: 10px 10px; }
+	#tpane button { font-size: 12px; padding: 0 5px; }
+	#tleft { left: 0; }
+		#taskdef { width: 30%; }
+	#tright { right: 0; text-align: right; }
+		#reboot-box { display: inline-block; padding-right: 15px; }
+		#td-modified { display: inline-block; padding-right: 20px; text-decoration: underline;
+		color: red; }
+
+#bpane {
+	position: absolute;
+	left: 0; bottom: 0; right: 0;
+	height: 93%;
+	background: none; background-color: #bbb;
+}
+	#bpane div { height: 88%; background-color: #fff; margin: 0 4px; border: 1px solid #aaa;
+	border-top: none; overflow: auto; }
+	#bpane div textarea { height: 99%; width: 99%; margin: 0; padding: 0; }

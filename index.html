@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>IITiS taskcreator</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" media="all" href="css/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
+</head>
+<body>
+
+<div id="world">
+	<div id="tpane">
+		<div id="tleft">
+			<select id="taskdef">
+				<option id="none">Choose...</option>
+			</select>
+			<button id="td-rename">Rename</button>
+			<button id="td-delete">Delete</button>
+			<button id="td-duplicate">Create duplicate</button>
+			<button id="td-new">Create new</button>
+		</div>
+		<div id="tright">
+			<span id="td-modified">Task not saved</span>
+			<button id="td-save">Save</button>
+			<button id="td-run">Run!</button>
+			<span id="reboot-box"><input id="td-reboot" type="checkbox" />Make a full reboot</span>
+		</div>
+	</div>
+	<div id="bpane">
+		<ul>
+			<li><a href="#tab-notes">Notes</a></li>
+			<li><a href="#tab-traffic">Traffic</a></li>
+			<li><a href="#tab-gen">Generator</a></li>
+			<li><a href="#tab-wifi">WiFi</a></li>
+		</ul>
+		<div id="tab-notes"><textarea class="taskdef" id="notes"></textarea></div>
+		<div id="tab-wifi"><textarea class="taskdef" id="wifi"></textarea></div>
+		<div id="tab-gen"><textarea class="taskdef" id="generator"></textarea></div>
+		<div id="tab-traffic"><textarea class="taskdef" id="traffic"></textarea></div>
+	</div>
+</div>
+
+<script type="text/javascript" src="lib/jquery.js"></script>
+<script type="text/javascript" src="lib/jquery-ui.js"></script>
+<script type="text/javascript" src="lib/jquery.jstree.min.js"></script>
+<script type="text/javascript" src="lib/rpc.js"></script>
+<script type="text/javascript" src="lib/json2.js"></script>
+<script type="text/javascript" src="lib/dump.js"></script>
+<script type="text/javascript" src="lib/sprintf.js"></script>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="client.js"></script>
+<script type="text/javascript">
+<!--
+	$(document).ready(C.init);
+//-->
+</script>
+
+</body>
+</html>
