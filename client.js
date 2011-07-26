@@ -15,6 +15,17 @@ init: function()
 	C.buttons_init();
 },
 
+notify: function(msg)
+{
+	$.jnotifica(msg, {
+		timeout: 5000,
+		position: "bottom",
+		msgCss: { fontSize: '15px', fontWeight: 'bold', textAlign: 'center' },
+		close: { text: 'X',
+			css: { color: '#fff', fontSize: '15px', position: 'absolute', top: 5, right: 10, cursor: 'pointer' }
+		}});
+},
+
 /**********/
 
 taskdef_current: "",
@@ -198,7 +209,7 @@ buttons_dup: function()
 	{
 		if (d.status) {
 			C.taskdef_reload();
-			alert(
+			C.notify(
 				"Task definition '" + d.name + "' created.\n" +
 				"Navigate the task definition list in order to edit it.");
 		} else {
@@ -219,7 +230,7 @@ buttons_new: function()
 	{
 		if (d.status) {
 			C.taskdef_reload();
-			alert(
+			C.notify(
 				"Task definition '" + d.name + "' created.\n" +
 				"Navigate the task definition list in order to edit it.");
 		} else {
@@ -247,6 +258,7 @@ buttons_rename: function()
 	{
 		if (d.status) {
 			C.taskdef_reload(name2);
+			C.notify("Task renamed to '" + name2 + "'");
 		} else {
 			alert("Action failed");
 		}
@@ -270,6 +282,7 @@ buttons_delete: function()
 	{
 		if (d.status) {
 			C.taskdef_reload();
+			C.notify("Task definition '" + name + "' deleted");
 		} else {
 			alert("Deletion failed");
 		}
@@ -300,7 +313,7 @@ buttons_run: function()
 	$.rpc("run", { name: name, reboot: $("#td-reboot").prop("checked") }, function(d)
 	{
 		if (d.status) {
-			alert("Task started");
+			C.notify("Task started");
 		} else {
 			alert("Starting failed");
 		}
