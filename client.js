@@ -186,7 +186,7 @@ buttons_save: function()
 	$.rpc("store", { name: name, taskdef: td }, function(d)
 	{
 		if (d.status) {
-			$("#td-modified").fadeOut(1000);
+			$("#td-modified").hide();
 		} else {
 			alert("Save failed");
 		}
