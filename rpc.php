@@ -118,6 +118,9 @@ function rpc_delete($p)
 function rpc_create($p)
 {
 	$name = str_replace("..", "", $p["name"]);
+	while ($name[0] == '.')
+		$name = substr($name, 1);
+
 	$tpl = str_replace("..", "", $p["tpl"]);
 	if (!$name) {
 		if ($tpl)

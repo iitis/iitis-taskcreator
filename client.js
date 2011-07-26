@@ -18,6 +18,7 @@ init: function()
 /**********/
 
 taskdef_current: "",
+taskdef_current_istpl: false,
 
 taskdef_init: function()
 {
@@ -25,17 +26,35 @@ taskdef_init: function()
 	C.taskdef_reload();
 },
 
-taskdef_changed: function()
+taskdef_select: function(name)
+{
+	$("#taskdef option:selected").attr("selected", false);
+	$("#taskdef option").each(function(i, e)
+	{
+		if ($(e).data("name") == name) {
+			$(e).attr("selected", true);
+			return true;
+		}
+	});
+
+	return false;
+},
+
+taskdef_changed: function(e)
 {
 	/* prevent loosing unsaved taskdef */
 	if ($("#td-modified:visible").length > 0) {
 		if (!confirm("Current task definition not saved. Continue?")) {
-			C.taskdef_reload(C.taskdef_current);
+			C.taskdef_select(C.taskdef_current);
 			return;
 		} else {
 			$("#td-modified").hide();
 		}
 	}
+
+	/* disable rename and delete on tpl */
+	C.taskdef_current_istpl = $("#taskdef option:selected").data("istpl");
+	C.buttons_tpl_toggle();
 
 	C.taskdef_current = $("#taskdef option:selected").data("name");
 	C.editor_load();
@@ -69,8 +88,13 @@ taskdef_reload: function(target)
 			o.appendTo("#taskdef");
 		});
 
-		/* !target means usually "comes from user" */
-		if (!target && changed)
+		/* add "template" taskdef */
+		var o = $("<option>");
+		o.data({name: ".tpl", istpl: true });
+		o.text("* Task definition template *");
+		o.appendTo("#taskdef");
+
+		if (changed)
 			C.taskdef_changed();
 	});
 },
@@ -120,6 +144,19 @@ buttons_init: function()
 
 	$("#td-save").button({icons: { primary: "ui-icon-disk" }});
 	$("#td-save").click(C.buttons_save);
+},
+
+buttons_tpl_toggle: function()
+{
+	if (C.taskdef_current_istpl) {
+		$("#td-rename").button("option", "disabled", true);
+		$("#td-delete").button("option", "disabled", true);
+		$("#td-run").button("option", "disabled", true);
+	} else {
+		$("#td-rename").button("option", "disabled", false);
+		$("#td-delete").button("option", "disabled", false);
+		$("#td-run").button("option", "disabled", false);
+	}
 },
 
 buttons_save: function()
@@ -196,6 +233,9 @@ buttons_rename: function()
 	var name = C.taskdef_current;
 	var name2;
 
+	if (C.taskdef_current_istpl)
+		return;
+
 	if (!name)
 		return;
 
@@ -217,6 +257,9 @@ buttons_delete: function()
 {
 	var name = C.taskdef_current;
 
+	if (C.taskdef_current_istpl)
+		return;
+
 	if (!name)
 		return;
 
@@ -236,6 +279,10 @@ buttons_delete: function()
 buttons_run: function()
 {
 	var name = C.taskdef_current;
+
+	if (C.taskdef_current_istpl)
+		return;
+
 	if (!name)
 		return;
 
