@@ -32,15 +32,33 @@
 	</div>
 	<div id="bpane">
 		<ul>
-			<li><a href="#tab-notes">Notes</a></li>
 			<li><a href="#tab-traffic">Traffic</a></li>
 			<li><a href="#tab-gen">Generator</a></li>
 			<li><a href="#tab-wifi">WiFi</a></li>
+			<li><a href="#tab-notes">Notes</a></li>
 		</ul>
-		<div id="tab-notes"><textarea class="taskdef" id="notes"></textarea></div>
-		<div id="tab-wifi"><textarea class="taskdef" id="wifi"></textarea></div>
-		<div id="tab-gen"><textarea class="taskdef" id="generator"></textarea></div>
-		<div id="tab-traffic"><textarea class="taskdef" id="traffic"></textarea></div>
+		<div id="tab-traffic">
+			<p>Documentation:
+			<a href="http://www.iitis.pl/~pjf/iitis-generator/doc/iitis-generator-traffic.5.html">iitis-generator-traffic(5)</a>
+			</p>
+			<textarea class="taskdef" id="traffic"></textarea>
+		</div>
+		<div id="tab-gen">
+			<p>Documentation:
+			<a href="http://www.iitis.pl/~pjf/iitis-generator/doc/iitis-generator-conf.5.html">iitis-generator-conf(5)</a>
+			</p>
+			<textarea class="taskdef" id="generator"></textarea>
+		</div>
+		<div id="tab-wifi">
+			<p>System startup script. Documentation:
+				<a href="http://linuxwireless.org/en/users/Documentation/iw#Adding_interfaces_with_iw">iw</a>
+			</p>
+			<textarea class="taskdef" id="wifi"></textarea>
+		</div>
+		<div id="tab-notes">
+			<p>Place for user notes</p>
+			<textarea class="taskdef" id="notes"></textarea>
+		</div>
 	</div>
 </div>
 
