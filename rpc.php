@@ -2,6 +2,18 @@
 
 require "config.php";
 
+/** Remove non-secure etc. chars from path element */
+function getclean($path)
+{
+	/* remove */
+	$stage1 = str_replace(array(".."), "", $path);
+
+	/* replace */
+	$stage2 = str_replace(array("/"), "_", $stage1);
+
+	return $stage2;
+}
+
 function rmfr($path)
 {
 	if (is_dir($path)) {
@@ -81,8 +93,8 @@ function rpc_list($p)
  */
 function rpc_rename($p)
 {
-	$name = str_replace("..", "", $p["name"]);
-	$new = str_replace("..", "", $p["new"]);
+	$name = getclean($p["name"]);
+	$new = getclean($p["new"]);
 
 	if (!$name || !$new)
 		return err(2, "either 'name' or 'new' not provided");
@@ -99,7 +111,7 @@ function rpc_rename($p)
  */
 function rpc_delete($p)
 {
-	$name = str_replace("..", "", $p["name"]);
+	$name = getclean($p["name"]);
 	if (!$name)
 		return err(3, "param 'name' not provided");
 
@@ -117,11 +129,11 @@ function rpc_delete($p)
  */
 function rpc_create($p)
 {
-	$name = str_replace("..", "", $p["name"]);
+	$name = getclean($p["name"]);
 	while ($name[0] == '.')
 		$name = substr($name, 1);
 
-	$tpl = str_replace("..", "", $p["tpl"]);
+	$tpl = getclean($p["tpl"]);
 	if (!$name) {
 		if ($tpl)
 			$name = "$tpl-copy";
@@ -154,7 +166,7 @@ function rpc_create($p)
  */
 function rpc_fetch($p)
 {
-	$name = str_replace("..", "", $p["name"]);
+	$name = getclean($p["name"]);
 	if (!$name)
 		return err(4, "param 'name' not provided");
 
@@ -176,7 +188,7 @@ function rpc_fetch($p)
  */
 function rpc_store($p)
 {
-	$name = str_replace("..", "", $p["name"]);
+	$name = getclean($p["name"]);
 	if (!$name)
 		return err(5, "param 'name' not provided");
 
@@ -207,7 +219,7 @@ function rpc_store($p)
  */
 function rpc_run($p)
 {
-	$name = str_replace("..", "", $p["name"]);
+	$name = getclean($p["name"]);
 	if (!$name)
 		return err(5, "param 'name' not provided");
 
