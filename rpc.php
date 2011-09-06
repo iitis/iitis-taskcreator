@@ -200,7 +200,7 @@ function rpc_store($p)
 	foreach ($taskdef as $file => $contents) {
 		$rc = file_put_contents(CFG_TASKDIR . "/$name/$file", $contents);
 
-		if ($rc == FALSE) {
+		if ($rc === FALSE) {
 			$err = true;
 			break;
 		}
